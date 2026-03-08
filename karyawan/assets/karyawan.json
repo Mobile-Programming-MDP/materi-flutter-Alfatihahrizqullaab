@@ -1,0 +1,102 @@
+[
+  {
+    "nama": "Ahmad Fauzi",
+    "umur": 25,
+    "alamat": {
+      "jalan": "Jl. Merdeka No. 10",
+      "kota": "Jakarta",
+      "provinsi": "DKI Jakarta"
+    },
+    "hobi": ["futsal", "membaca"]
+  },
+  {
+    "nama": "Siti Rahma",
+    "umur": 28,
+    "alamat": {
+      "jalan": "Jl. Sudirman No. 21",
+      "kota": "Bandung",
+      "provinsi": "Jawa Barat"
+    },
+    "hobi": ["memasak", "menulis"]
+  },
+  {
+    "nama": "Budi Santoso",
+    "umur": 32,
+    "alamat": {
+      "jalan": "Jl. Diponegoro No. 5",
+      "kota": "Yogyakarta",
+      "provinsi": "DI Yogyakarta"
+    },
+    "hobi": ["bersepeda", "gaming"]
+  },
+  {
+    "nama": "Rina Kartika",
+    "umur": 24,
+    "alamat": {
+      "jalan": "Jl. Gajah Mada No. 17",
+      "kota": "Semarang",
+      "provinsi": "Jawa Tengah"
+    },
+    "hobi": ["traveling", "fotografi"]
+  },
+  {
+    "nama": "Dedi Pratama",
+    "umur": 29,
+    "alamat": {
+      "jalan": "Jl. Ahmad Yani No. 8",
+      "kota": "Medan",
+      "provinsi": "Sumatera Utara"
+    },
+    "hobi": ["berenang", "membaca"]
+  },
+  {
+    "nama": "Lina Marlina",
+    "umur": 27,
+    "alamat": {
+      "jalan": "Jl. Pahlawan No. 12",
+      "kota": "Palembang",
+      "provinsi": "Sumatera Selatan"
+    },
+    "hobi": ["menari", "menonton film"]
+  },
+  {
+    "nama": "Andi Saputra",
+    "umur": 31,
+    "alamat": {
+      "jalan": "Jl. Imam Bonjol No. 3",
+      "kota": "Makassar",
+      "provinsi": "Sulawesi Selatan"
+    },
+    "hobi": ["mancing", "musik"]
+  },
+  {
+    "nama": "Maya Sari",
+    "umur": 26,
+    "alamat": {
+      "jalan": "Jl. Hasanuddin No. 9",
+      "kota": "Denpasar",
+      "provinsi": "Bali"
+    },
+    "hobi": ["yoga", "membaca"]
+  },
+  {
+    "nama": "Fajar Hidayat",
+    "umur": 30,
+    "alamat": {
+      "jalan": "Jl. Siliwangi No. 14",
+      "kota": "Bogor",
+      "provinsi": "Jawa Barat"
+    },
+    "hobi": ["basket", "coding"]
+  },
+  {
+    "nama": "Nadia Putri",
+    "umur": 23,
+    "alamat": {
+      "jalan": "Jl. Veteran No. 6",
+      "kota": "Malang",
+      "provinsi": "Jawa Timur"
+    },
+    "hobi": ["melukis", "bersepeda"]
+  }
+]
