@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1056780029393",
+    "project_id": "frst-app-6fd43",
+    "storage_bucket": "frst-app-6fd43.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1056780029393:android:7925261ca16d8d04b6a4f0",
+        "android_client_info": {
+          "package_name": "com.example.cepu"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-6yS8fyS3sCEVZUEtNIU4qSq5O5n7Lno"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1056780029393:android:43c8bc6db000d41bb6a4f0",
+        "android_client_info": {
+          "package_name": "com.example.daftar_belanja"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-6yS8fyS3sCEVZUEtNIU4qSq5O5n7Lno"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
