@@ -45,6 +45,11 @@ class _HomeScreenState extends State<HomeScreen> {
     getFirebaseAuthUser();
   }
 
+  String generateAvatarUrl(String? fullname){
+    final FormattedName = fullname!.trim().replaceAll(" ", "+");
+    return 'https://ui-avatars.com/api/?name=$FormattedName&color=ffffff&background=000000';
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -59,13 +64,24 @@ class _HomeScreenState extends State<HomeScreen> {
             }, icon: const Icon(Icons.logout))
         ],
       ),
-      body: Center(
-        child: Column(
+      body: Column(
           children: [
-            Text("You Have Been Signed In With Token Id : ${_idToken!}"),
-            Text("Cureent User : ${_uid!}"),
-            Text("Current Email : ${_email!}")
+            Image.network(
+              generateAvatarUrl(
+                FirebaseAuth.instance.currentUser?.displayName.toString(),
+              ),
+              width: 100,
+              height: 100,
+            ),
+            SizedBox(height: 6.0),
+            Text(
+              FirebaseAuth.instance.currentUser!.displayName!,
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 10.0)
           ],
-        )));
+        )
+      );
   }
+
 }

@@ -10,11 +10,12 @@ class ShoppingListScreen extends StatefulWidget {
 
 class _ShoppingListScreenState extends State<ShoppingListScreen> {
   final TextEditingController _controller = TextEditingController();
-  final ShoppingServices _shoppingService = ShoppingServices();
-  
+  final ShoppingService _shoppingService = ShoppingService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: const Text('Daftar Belanja')),
       body: Column(
         children: [
           Padding(
@@ -24,52 +25,52 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
                 Expanded(
                   child: TextField(
                     controller: _controller,
-                    decoration: 
-                      const InputDecoration(hintText: 'Masukkan nama barang'),
+                    decoration: const InputDecoration(
+                      hintText: 'Masukkan nama barang',
+                    ),
                   ),
                 ),
                 IconButton(
-                  icon: const Icon(Icons.add),
                   onPressed: () {
                     _shoppingService.addShoppingItem(_controller.text);
                     _controller.clear();
                   },
-                )
+                  icon: const Icon(Icons.add),
+                ),
               ],
             ),
           ),
           Expanded(
-            child: StreamBuilder<Map<String, String>>(
+            child: StreamBuilder(
               stream: _shoppingService.getShoppingList(),
-              builder: (context, snapshot){
-                if(snapshot.hasData){
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
                   Map<String, String> items = snapshot.data!;
                   return ListView.builder(
                     itemCount: snapshot.data!.length,
-                    itemBuilder: (context, index){
+                    itemBuilder: (context, index) {
                       final key = items.keys.elementAt(index);
                       final item = items[key];
                       return ListTile(
                         title: Text(item!),
                         trailing: IconButton(
                           icon: const Icon(Icons.delete),
-                          onPressed: (){
+                          onPressed: () {
                             _shoppingService.removeShoppingItem(key);
                           },
                         ),
                       );
                     },
                   );
-                } else if (snapshot.hasError){
-                  return Center(child: Text("Error: ${snapshot.error}"));
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
                 } else {
                   return const Center(child: CircularProgressIndicator());
                 }
               },
-            ) 
-          )
+            ),
+          ),
         ],
-        
       ),
     );
   }

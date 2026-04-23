@@ -1,21 +1,17 @@
 import 'package:firebase_database/firebase_database.dart';
 
+class ShoppingService {
+  final DatabaseReference _databaseReference = FirebaseDatabase.instance
+      .ref()
+      .child("shopping_list");
 
-
-class ShoppingServices {
-  final DatabaseReference _database =
-    FirebaseDatabase.instance.ref().child('shopping_list');
-
-  Stream<Map<String, String>> getShoppingList(){
-    return _database.onValue.map((event) {
+  Stream<Map<String, String>> getShoppingList() {
+    return _databaseReference.onValue.map((event) {
       final Map<String, String> items = {};
       DataSnapshot snapshot = event.snapshot;
-      //print('Snapshot data: ${snapshot.value}');
-      if(snapshot.value != null){
+      if (snapshot.value != null) {
         Map<dynamic, dynamic> values = snapshot.value as Map<dynamic, dynamic>;
-        values.forEach((key, value){
-          // print('Key : $key'); // Print the key
-          // print('Value: $value'); // Print the value
+        values.forEach((key, value) {
           items[key] = value['name'] as String;
         });
       }
@@ -23,11 +19,11 @@ class ShoppingServices {
     });
   }
 
-  void addShoppingItem(String itemName) {
-    _database.push().set({'name' : itemName});
+  void addShoppingItem(String item) {
+    _databaseReference.push().set({'name': item});
   }
 
   Future<void> removeShoppingItem(String key) async {
-    await _database.child(key).remove();
+    await _databaseReference.child(key).remove();
   }
 }

@@ -57,6 +57,7 @@ class DefaultFirebaseOptions {
     authDomain: 'frst-app-6fd43.firebaseapp.com',
     storageBucket: 'frst-app-6fd43.firebasestorage.app',
     measurementId: 'G-WNMVV79GT1',
+    databaseURL: 'https://frst-app-6fd43-default-rtdb.firebaseio.com/'
   );
 
   static const FirebaseOptions android = FirebaseOptions(
@@ -65,5 +66,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1056780029393',
     projectId: 'frst-app-6fd43',
     storageBucket: 'frst-app-6fd43.firebasestorage.app',
+    databaseURL: 'https://frst-app-6fd43-default-rtdb.firebaseio.com/'
   );
 }
