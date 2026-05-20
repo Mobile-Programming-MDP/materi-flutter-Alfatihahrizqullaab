@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as http;
 
 class AddPostScreen extends StatefulWidget {
   const AddPostScreen({super.key});
@@ -22,6 +23,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
   String? _category;
   bool _isSubmitting = false;
   bool _isGettingLocation = false;
+  bool _isGenerating = false;
   List<String> get categories {
     return [
       'Jalan Rusak',
@@ -119,6 +121,67 @@ class _AddPostScreenState extends State<AddPostScreen> {
     );
   }
 
+  Future<void> _generateDescriptionWithAi() async {
+  if (_base64Image == null) return;
+  
+  // Menggunakan _isGenerating sesuai yang ada di blok finally
+  setState(() => _isGenerating = true); 
+  
+  try {
+    const apiKey = 'YOUR API KEY';
+    const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:streamGenerateContent?key=$apiKey';
+    
+    final body = jsonEncode({
+      "contents": [
+        {
+          "parts": [
+            {
+              "inlineData": {"mimeType": "image/jpeg", "data": _base64Image}
+            },
+            {
+              "text":
+                  "Berdasarkan foto ini, identifikasi satu kategori utama kerusakan fasilitas umum "
+                  "dari daftar berikut: Jalan Rusak, Lampu Jalan Mati, Lawan Arah, Merokok di Jalan, "
+                  "Tidak Pakai Helm dan Lainnya. "
+                  "Pilih kategori yang paling dominan atau paling mendesak untuk dilaporkan. "
+                  "Buat deskripsi singkat untuk laporan perbaikan, dan tambahkan permohonan "
+                  "perbaikan. "
+                  "Fokus pada kerusakan yang terlihat dan hindari spekulasi.\n\n"
+                  "Format output yang diinginkan:\n"
+                  "Kategori: [satu kategori yang dipilih]\n"
+                  "Deskripsi: [deskripsi singkat]"
+            }
+          ]
+        }
+      ]
+    });
+
+    // --- Eksekusi HTTP Request sesuai gambar ---
+    final headers = {'Content-Type': 'application/json'};
+    final response = await http.post(
+      Uri.parse(url),
+      headers: headers,
+      body: body,
+    );
+
+    if (response.statusCode == 200) {
+      // TODO: Parsing dan gunakan response JSON dari Gemini di sini
+      // Contoh:
+      // final responseData = jsonDecode(response.body);
+      // ... ambil teks dari responseData ...
+      
+    } else {
+      debugPrint('Request failed: ${response.body}');
+    }
+    
+  } catch (e) {
+    debugPrint('Failed to generate AI description: $e');
+  } finally {
+    if (mounted) setState(() => _isGenerating = false);
+  }
+}
+
+
   //4. Fungsi Widget tampil gambar
   Widget _buildImagePreview() {
     if (_base64Image == null) {
@@ -196,8 +259,8 @@ class _AddPostScreenState extends State<AddPostScreen> {
           category: _category,
           latitude: _latitude,
           longitude: _longitude,
-          user_id: userId,
-          user_fullname: fullName,
+          userId: userId,
+          userFullName: fullName,
         ),
       );
       if (!mounted) return;

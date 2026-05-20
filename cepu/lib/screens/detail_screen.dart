@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cepu/models/post.dart';
+import 'package:cepu/screens/map_detail_screen.dart';
 import 'package:cepu/services/post_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -37,14 +38,14 @@ class DetailScreen extends StatelessWidget {
 
   void _sharePost() {
     final text =
-        '${post.category ?? ''}\n${post.description ?? ''}\nPosted by: ${post.user_fullname ?? ''}';
+        '${post.category ?? ''}\n${post.description ?? ''}\nPosted by: ${post.userFullName ?? ''}';
     SharePlus.instance.share(ShareParams(text: text));
   }
 
   @override
   Widget build(BuildContext context) {
     final currentUserId = FirebaseAuth.instance.currentUser?.uid;
-    final isOwner = currentUserId != null && post.user_id == currentUserId;
+    final isOwner = currentUserId != null && post.userId == currentUserId;
 
     return Scaffold(
       appBar: AppBar(
@@ -84,8 +85,7 @@ class DetailScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if (post.category != null)
-                    Chip(label: Text(post.category!)),
+                  if (post.category != null) Chip(label: Text(post.category!)),
                   const SizedBox(height: 8),
                   Text(
                     post.description ?? '',
@@ -97,7 +97,7 @@ class DetailScreen extends StatelessWidget {
                       const Icon(Icons.person, size: 18, color: Colors.grey),
                       const SizedBox(width: 4),
                       Text(
-                        post.user_fullname ?? 'Unknown',
+                        post.userFullName ?? 'Unknown',
                         style: const TextStyle(color: Colors.grey),
                       ),
                     ],
@@ -119,6 +119,19 @@ class DetailScreen extends StatelessWidget {
                       ],
                     ),
                   ],
+                  const SizedBox(height: 12),
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => MapDetailScreen(post: post),
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.map),
+                    label: const Text('View on Map'),
+                  ),
                 ],
               ),
             ),
